@@ -4,7 +4,7 @@ Im just following the TD tutorial of Brackeys might become a game later
 
 ## Description
 
-A project tou create a TD
+A project too create a TD
 
 ## Getting Started
 
