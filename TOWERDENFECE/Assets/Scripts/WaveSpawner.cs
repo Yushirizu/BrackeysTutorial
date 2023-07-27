@@ -19,14 +19,17 @@ public class WaveSpawner : MonoBehaviour
 
     void Update()
     {
+        // If countdown is less than or equal to 0, spawn a wave
         if (countdown <= 0f)
         {
             StartCoroutine(SpawnWave());
             countdown = timeBetweenWaves;
         }
 
+        // Countdown
         countdown -= Time.deltaTime;
 
+        // Round the countdown to an integer
         WaveCountdownText.text = Mathf.Round(countdown).ToString();
     }
 
@@ -34,6 +37,7 @@ public class WaveSpawner : MonoBehaviour
     {
         waveIndex++;
 
+        // Spawn enemies
         for (int i = 0; i < waveIndex; i++)
         {
             SpawnEnemy();
@@ -43,6 +47,7 @@ public class WaveSpawner : MonoBehaviour
 
     void SpawnEnemy()
     {
+        // Spawn enemy
         Instantiate(enemyPrefab, spawnPoint.position, spawnPoint.rotation);
     }
 }

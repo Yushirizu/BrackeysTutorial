@@ -27,12 +27,14 @@ public class Turret : MonoBehaviour
 
     void UpdateTarget()
     {
+        // Find all enemies
         GameObject[] enemies = GameObject.FindGameObjectsWithTag(enemyTag);
         float shortestDistance = Mathf.Infinity;
         GameObject nearestEnemy = null;
 
         foreach (GameObject enemy in enemies)
         {
+            // Find distance to enemy
             float distanceToEnemy = Vector3.Distance(transform.position, enemy.transform.position);
             if (distanceToEnemy < shortestDistance)
             {
@@ -41,6 +43,7 @@ public class Turret : MonoBehaviour
             }
         }
 
+        // If enemy is in range, set target to nearest enemy
         if (nearestEnemy != null && shortestDistance <= range)
         {
             target = nearestEnemy.transform;
@@ -54,6 +57,7 @@ public class Turret : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        // If no target, return
         if (target == null)
         {
             return;
@@ -61,10 +65,14 @@ public class Turret : MonoBehaviour
 
         // Lock on target
         Vector3 dir = target.position - transform.position;
+        // Rotate turret
         Quaternion lookRotation = Quaternion.LookRotation(dir);
+        // Smoothly rotate turret
         Vector3 rotation = Quaternion.Lerp(partToRotate.rotation, lookRotation, Time.deltaTime * turnSpeed).eulerAngles;
+        // Rotate only on y axis
         partToRotate.rotation = Quaternion.Euler(0f, rotation.y, 0f);
 
+        // Fire
         if (fireCountdown <= 0f)
         {
             Shoot();
@@ -76,15 +84,19 @@ public class Turret : MonoBehaviour
 
     private void OnDrawGizmosSelected()
     {
+        // Draw range
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, range);
     }
 
     void Shoot()
     {
+        // Create bullet
         GameObject bulletGO = (GameObject)Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
+        // Get bullet component
         Bullet bullet = bulletGO.GetComponent<Bullet>();
 
+        // Shoot bullet
         if (bullet != null)
         {
             bullet.Seek(target);
