@@ -4,21 +4,21 @@ public class EnnemyMovement : MonoBehaviour
 {
     public float speed = 10f;
     
-    private Transform target;
+    private Transform _target;
     
-    private int wavepointIndex = 0;
+    private int _wavepointIndex = 0;
     
     void Start()
     {
-        target = Waypoints.points[0];
+        _target = Waypoints.points[0];
     }
     
     void Update()
     {
-        Vector3 dir = target.position - transform.position;
+        Vector3 dir = _target.position - transform.position;
         transform.Translate(dir.normalized * speed * Time.deltaTime, Space.World);
         
-        if (Vector3.Distance(transform.position, target.position) <= 0.2f)
+        if (Vector3.Distance(transform.position, _target.position) <= 0.2f)
         {
             GetNextWaypoint();
         }
@@ -26,13 +26,13 @@ public class EnnemyMovement : MonoBehaviour
     
     void GetNextWaypoint()
     {
-        if (wavepointIndex >= Waypoints.points.Length - 1)
+        if (_wavepointIndex >= Waypoints.points.Length - 1)
         {
             Destroy(gameObject);
             return;
         }
         
-        wavepointIndex++;
-        target = Waypoints.points[wavepointIndex];
+        _wavepointIndex++;
+        _target = Waypoints.points[_wavepointIndex];
     }
 }

@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 
 public class BuildManager : MonoBehaviour
@@ -23,15 +22,15 @@ public class BuildManager : MonoBehaviour
     public GameObject anotherTurretPrefab;
 
 
-    private GameObject turretToBuild;
+    private GameObject _turretToBuild;
 
     public GameObject GetTurretToBuild()
     {
-        return turretToBuild;
+        return _turretToBuild;
     }
 
     public void SetTurretToBuild(GameObject turret)
     {
-        turretToBuild = turret;
+        _turretToBuild = turret;
     }
 }

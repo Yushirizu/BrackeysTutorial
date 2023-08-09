@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -7,23 +6,23 @@ public class Node : MonoBehaviour
     public Color hoverColor;
     public Vector3 positionOffset;
 
-    private GameObject turret;
+    private GameObject _turret;
 
-    private Color startColor;
+    private Color _startColor;
 
-    private Renderer rend;
+    private Renderer _rend;
 
-    BuildManager buildManager;
+    BuildManager _buildManager;
 
 
     void Start()
     {
         //Get the renderer component
-        rend = GetComponent<Renderer>();
+        _rend = GetComponent<Renderer>();
         //Make it back to the original color
-        startColor = rend.material.color;
+        _startColor = _rend.material.color;
 
-        buildManager = BuildManager.instance;
+        _buildManager = BuildManager.instance;
     }
 
     private void OnMouseDown()
@@ -34,21 +33,21 @@ public class Node : MonoBehaviour
             return;
         }
 
-        if (buildManager.GetTurretToBuild() == null)
+        if (_buildManager.GetTurretToBuild() == null)
         {
             return;
         }
 
         //If there is a turret, don't build
-        if (turret != null)
+        if (_turret != null)
         {
             Debug.Log("Can't build there! - TODO: Display on screen.");
             return;
         }
 
         //Build a turret
-        GameObject turretToBuild = buildManager.GetTurretToBuild();
-        turret = (GameObject)Instantiate(turretToBuild, transform.position + positionOffset, transform.rotation);
+        GameObject turretToBuild = _buildManager.GetTurretToBuild();
+        _turret = (GameObject)Instantiate(turretToBuild, transform.position + positionOffset, transform.rotation);
     }
 
     void OnMouseEnter()
@@ -59,18 +58,18 @@ public class Node : MonoBehaviour
             return;
         }
 
-        if (buildManager.GetTurretToBuild() == null)
+        if (_buildManager.GetTurretToBuild() == null)
         {
             return;
         }
 
         //On mouse enter, change the color to hover color
-        rend.material.color = hoverColor;
+        _rend.material.color = hoverColor;
     }
 
     void OnMouseExit()
     {
         //On mouse exit, make it back to the original color
-        rend.material.color = startColor;
+        _rend.material.color = _startColor;
     }
 }

@@ -2,29 +2,29 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
-    private Transform target;
+    private Transform _target;
 
     public float speed = 70f;
 
     public GameObject impactEffect;
 
-    public void Seek(Transform _target)
+    public void Seek(Transform target)
     {
-        target = _target;
+        this._target = target;
     }
 
 
     // Update is called once per frame
     void Update()
     {
-        if (target == null)
+        if (_target == null)
         {
             Destroy(gameObject);
             return;
         }
 
         // Lock on target
-        Vector3 dir = target.position - transform.position;
+        Vector3 dir = _target.position - transform.position;
         float distanceThisFrame = speed * Time.deltaTime;
 
         if (dir.magnitude <= distanceThisFrame)
@@ -34,13 +34,13 @@ public class Bullet : MonoBehaviour
         }
 
         transform.Translate(dir.normalized * distanceThisFrame, Space.World);
-        transform.LookAt(target);
+        transform.LookAt(_target);
     }
 
     void HitTarget()
     {
         GameObject effectIns = (GameObject)Instantiate(impactEffect, transform.position, transform.rotation);
         Destroy(effectIns, 2f);
-        Destroy(target.gameObject);
+        Destroy(_target.gameObject);
     }
 }

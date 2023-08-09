@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class CameraController : MonoBehaviour
 {
-    private bool doMovement = true;
+    private bool _doMovement = true;
 
     public float panSpeed = 30f;
 
@@ -16,11 +16,11 @@ public class CameraController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             // Toggle movement
-            doMovement = !doMovement;
+            _doMovement = !_doMovement;
         }
 
         // If movement is disabled, return
-        if (!doMovement)
+        if (!_doMovement)
         {
             return;
         }
@@ -28,25 +28,25 @@ public class CameraController : MonoBehaviour
         if (Input.GetKey("w") || Input.mousePosition.y >= Screen.height - panBorderThickness)
         {
             // Move camera forward
-            transform.Translate(Vector3.forward * panSpeed * Time.deltaTime, Space.World);
+            transform.Translate(Vector3.forward * (panSpeed * Time.deltaTime), Space.World);
         }
 
         if (Input.GetKey("s") || Input.mousePosition.y <= panBorderThickness)
         {
             // Move camera backward
-            transform.Translate(Vector3.back * panSpeed * Time.deltaTime, Space.World);
+            transform.Translate(Vector3.back * (panSpeed * Time.deltaTime), Space.World);
         }
 
         if (Input.GetKey("d") || Input.mousePosition.x >= Screen.width - panBorderThickness)
         {
             // Move camera right
-            transform.Translate(Vector3.right * panSpeed * Time.deltaTime, Space.World);
+            transform.Translate(Vector3.right * (panSpeed * Time.deltaTime), Space.World);
         }
 
         if (Input.GetKey("a") || Input.mousePosition.x <= panBorderThickness)
         {
             // Move camera left
-            transform.Translate(Vector3.left * panSpeed * Time.deltaTime, Space.World);
+            transform.Translate(Vector3.left * (panSpeed * Time.deltaTime), Space.World);
         }
 
         // Scroll wheel zoom

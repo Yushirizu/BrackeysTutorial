@@ -1,6 +1,7 @@
-using System;
-using UnityEngine;
 using System.Collections;
+using System.Globalization;
+using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 public class WaveSpawner : MonoBehaviour
@@ -11,34 +12,34 @@ public class WaveSpawner : MonoBehaviour
 
     public float timeBetweenWaves = 5f;
 
-    private float countdown = 2f;
+    private float _countdown = 2f;
 
-    public Text WaveCountdownText;
+    [FormerlySerializedAs("WaveCountdownText")] public Text waveCountdownText;
 
-    private int waveIndex = 0;
+    private int _waveIndex;
 
     void Update()
     {
         // If countdown is less than or equal to 0, spawn a wave
-        if (countdown <= 0f)
+        if (_countdown <= 0f)
         {
             StartCoroutine(SpawnWave());
-            countdown = timeBetweenWaves;
+            _countdown = timeBetweenWaves;
         }
 
         // Countdown
-        countdown -= Time.deltaTime;
+        _countdown -= Time.deltaTime;
 
         // Round the countdown to an integer
-        WaveCountdownText.text = Mathf.Round(countdown).ToString();
+        waveCountdownText.text = Mathf.Round(_countdown).ToString(CultureInfo.InvariantCulture);
     }
 
     IEnumerator SpawnWave()
     {
-        waveIndex++;
+        _waveIndex++;
 
         // Spawn enemies
-        for (int i = 0; i < waveIndex; i++)
+        for (int i = 0; i < _waveIndex; i++)
         {
             SpawnEnemy();
             yield return new WaitForSeconds(0.5f);
