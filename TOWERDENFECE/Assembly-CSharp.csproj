@@ -56,9 +56,12 @@
      <Compile Include="Assets\Scripts\Waypoints.cs" />
      <Folder Include="Assets" />
      <Folder Include="Assets\Prefabs" />
+     <Folder Include="Assets\Imports\ceres-fauna-hololive-en-council\source" />
      <Folder Include="Assets\Scenes" />
      <Folder Include="Assets\Materials" />
+     <Folder Include="Assets\Imports\ceres-fauna-hololive-en-council" />
      <Folder Include="Assets\Imports" />
+     <Folder Include="Assets\Imports\ceres-fauna-hololive-en-council\textures" />
      <Folder Include="Assets\Scripts" />
      <Reference Include="UnityEngine">
      <HintPath>C:\Program Files\Unity\Hub\Editor\2022.3.1f1\Editor\Data\Managed\UnityEngine\UnityEngine.dll</HintPath>
